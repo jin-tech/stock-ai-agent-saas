@@ -1,9 +1,9 @@
 'use client'
 
-import AlertForm from '@/components/AlertForm'
+import AlertForm, { AlertData } from '@/components/AlertForm'
 
 export default function Home() {
-  const handleAlertSuccess = (data: { stockName: string; keywords: string }) => {
+  const handleAlertSuccess = (data: AlertData) => {
     console.log('Alert created successfully:', data)
   }
 
