@@ -76,34 +76,20 @@ Before you begin, ensure you have the following installed:
    cd stock-ai-agent-saas
    ```
 
-2. **Set up environment variables**
+2. **Start all services with Docker Compose**
    ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
+   docker compose up --build
    ```
 
-3. **Start with Docker Compose** (Recommended)
-   ```bash
-   docker-compose up -d
-   ```
-
-4. **Or run services individually**
-   ```bash
-   # Start backend
-   cd backend
-   pip install -r requirements.txt
-   uvicorn main:app --reload
-
-   # Start frontend (in another terminal)
-   cd frontend
-   npm install
-   npm run dev
-   ```
-
-5. **Access the application**
+3. **Access the application**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000
    - API Documentation: http://localhost:8000/docs
+
+4. **Stop the services**
+   ```bash
+   docker compose down
+   ```
 
 ## 📁 Project Structure
 
