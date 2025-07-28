@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -24,5 +25,8 @@
     "eslint-config-next": "15.4.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.4.4"
   }
 }
