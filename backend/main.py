@@ -46,7 +46,9 @@ CACHE_EXPIRY = 3600  # 1 hour in seconds
 
 class PERatioService:
     def __init__(self):
-        self.api_key = os.getenv("ALPHA_VANTAGE_API_KEY", "demo")
+        self.api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
+        if not self.api_key:
+            raise RuntimeError("Environment variable 'ALPHA_VANTAGE_API_KEY' must be set.")
         self.base_url = "https://www.alphavantage.co/query"
         
     async def get_company_overview(self, symbol: str) -> Dict[str, Any]:
