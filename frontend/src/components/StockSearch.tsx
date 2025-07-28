@@ -9,12 +9,13 @@ interface StockSearchProps {
 export default function StockSearch({ onStockSearch }: StockSearchProps) {
   const [symbol, setSymbol] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!symbol.trim()) {
-      alert('Please enter a stock symbol');
+      setErrorMessage('Please enter a stock symbol');
       return;
     }
 
