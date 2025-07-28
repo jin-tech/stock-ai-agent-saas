@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Custom styles for PE ratio components */
+.pe-ratio-card {
+  @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow;
+}
+
+.pe-ratio-positive {
+  @apply text-green-600;
+}
+
+.pe-ratio-negative {
+  @apply text-red-600;
+}
+
+.pe-ratio-neutral {
+  @apply text-gray-600;
+}
