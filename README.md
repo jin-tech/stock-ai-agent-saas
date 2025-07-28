@@ -91,13 +91,11 @@ stock-ai-agent-saas/
 - Redis (v6 or higher)
 
 ### Installation
-
 1. **Clone the repository**
    ```bash
    git clone https://github.com/jin-tech/stock-ai-agent-saas.git
    cd stock-ai-agent-saas
    ```
-
 2. **Set up environment variables**
    ```bash
    cp .env.example .env
@@ -215,7 +213,6 @@ kubectl apply -f infrastructure/kubernetes/
 ```
 
 ## 🤝 Contributing
-
 We welcome contributions to the Stock AI Agent SaaS project! Please follow these guidelines:
 
 ### Development Process
@@ -268,5 +265,3 @@ For support and questions:
 - Check the documentation for common questions
 
 ---
-
-**Built with ❤️ by the Jin-Tech team**
