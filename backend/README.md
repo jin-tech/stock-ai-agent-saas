@@ -72,3 +72,39 @@ app/
 └── routers/
     └── alerts.py        # API endpoints
 ```
+
+## Testing
+
+The backend includes comprehensive E2E (End-to-End) testing to ensure API reliability and functionality.
+
+### Running Tests
+
+```bash
+# Run E2E tests
+python -m pytest test_e2e_backend.py -v
+
+# Use the test runner script
+./run_e2e_tests.sh
+
+# Run all tests including existing ones
+python -m pytest -v
+```
+
+### Test Coverage
+
+The E2E test suite covers:
+- ✅ Complete CRUD operations for alerts
+- ✅ Input validation and error handling
+- ✅ Database operations with proper isolation
+- ✅ API filtering and pagination
+- ✅ Edge cases and boundary conditions
+- ✅ Complete workflow testing
+
+### Test Features
+
+- **Isolated Testing**: Each test uses an in-memory SQLite database
+- **No External Dependencies**: Tests run without PostgreSQL/Redis
+- **CI/CD Integration**: Automated testing with GitHub Actions
+- **Comprehensive Coverage**: 28 test cases covering all functionality
+
+For detailed testing documentation, see [E2E_TESTING.md](E2E_TESTING.md).
