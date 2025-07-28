@@ -1,9 +1,12 @@
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import create_tables
 from app.routers import alerts
-from app.models import alert  # Import models to register them
+from app.routers import news as news_router
+from app.models import alert, news  # Import models to register them
+from app.services.rss_service import rss_service
 
 # Create database tables
 create_tables()
@@ -28,6 +31,27 @@ app.add_middleware(
 
 # Include routers
 app.include_router(alerts.router)
+app.include_router(news_router.router)
+
+
+# Background task for RSS feeds
+async def rss_background_task():
+    """Background task to fetch RSS news every 10 minutes"""
+    while True:
+        try:
+            await rss_service.fetch_all_news()
+        except Exception as e:
+            print(f"Error in RSS background task: {e}")
+        
+        # Wait 10 minutes (600 seconds) before next fetch
+        await asyncio.sleep(600)
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Start background tasks when the app starts"""
+    # Start the RSS background task
+    asyncio.create_task(rss_background_task())
 
 
 @app.get("/")
