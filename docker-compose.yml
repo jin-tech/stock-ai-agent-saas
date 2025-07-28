@@ -1,68 +1,55 @@
+version: '3.8'
+
 services:
-  # PostgreSQL Database
-  postgres:
-    image: postgres:15-alpine
-    container_name: stock-ai-postgres
-    environment:
-      POSTGRES_DB: stock_ai_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - stock-ai-network
-
-  # Redis Cache
-  redis:
-    image: redis:7-alpine
-    container_name: stock-ai-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - stock-ai-network
-
-  # FastAPI Backend
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: stock-ai-backend
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/stock_ai_db
-      - REDIS_URL=redis://redis:6379
+      - ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY}
+      # Ensure to set a valid Alpha Vantage API key in the environment. This is required for the application to function properly.
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/stock_ai_db
     depends_on:
       - postgres
-      - redis
-    networks:
-      - stock-ai-network
     volumes:
       - ./backend:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
-  # Next.js Frontend
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: stock-ai-frontend
     ports:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
     depends_on:
       - backend
-    networks:
-      - stock-ai-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=stock_ai_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
 
 volumes:
   postgres_data:
   redis_data:
-
-networks:
-  stock-ai-network:
-    driver: bridge
