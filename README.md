@@ -1,245 +1,267 @@
 # Stock AI Agent SaaS
 
-> An intelligent SaaS platform that leverages AI agents to monitor stock market news and provide automated trading assistance with comprehensive stock analysis.
+A comprehensive SaaS platform that leverages AI agents to assist with stock trading decisions by monitoring news feeds and analyzing stock data. The platform helps users set trading limits and provides stock summaries including PE ratios and market sentiment analysis.
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Tech Stack](https://img.shields.io/badge/Stack-Next.js%20%7C%20FastAPI%20%7C%20PostgreSQL-brightgreen)](#tech-stack)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Status](https://img.shields.io/badge/status-in%20development-yellow.svg)
 
-## 🚀 Overview
+## 📋 Table of Contents
 
-Stock AI Agent SaaS is a comprehensive platform designed to help traders and investors make informed decisions through AI-powered market analysis. The system monitors multiple news sources, analyzes sentiment, and provides intelligent alerts and trading recommendations.
+- [Overview](#overview)
+- [Tech Stack](#tech-stack)
+- [Key Features](#key-features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Development](#development)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Key Features
+## 🎯 Overview
 
-- 📊 **Smart Stock Alerts** - Set up keyword-based alerts for stocks of interest
-- 🤖 **AI-Powered News Analysis** - Multi-source RSS feed monitoring and analysis
-- 📈 **Market Sentiment Analysis** - Real-time sentiment tracking from news sources
-- 📋 **Comprehensive Stock Data** - PE ratios, technical indicators, and market summaries
-- 🔔 **Multi-Channel Notifications** - LINE Notify, Email alerts (planned)
-- ☁️ **Cloud-Ready** - Built for Azure Cloud deployment with Kubernetes support
+Stock AI Agent SaaS is a modern monorepo project designed to provide intelligent stock trading assistance through AI-powered analysis. The platform combines real-time news monitoring, sentiment analysis, and automated trading recommendations to help users make informed investment decisions.
 
-## 🏗️ Architecture
+## 🛠 Tech Stack
 
-This monorepo contains multiple interconnected services that work together to provide a seamless trading assistance experience:
+### Frontend
+- **Framework:** Next.js (React)
+- **Styling:** TailwindCSS (planned)
+- **State Management:** Redux Toolkit (planned)
+
+### Backend
+- **API Framework:** FastAPI (Python)
+- **Database:** PostgreSQL
+- **Caching:** Redis
+- **Task Queue:** Celery (planned)
+
+### Infrastructure
+- **Containerization:** Docker & Docker Compose
+- **Orchestration:** Kubernetes (planned)
+- **Cloud Platform:** Azure Cloud (future deployment)
+- **CI/CD:** GitHub Actions (planned)
+
+### AI/ML Stack
+- **News Processing:** RSS feed aggregation
+- **Sentiment Analysis:** NLP models
+- **Market Analysis:** Custom AI algorithms
+
+## ✨ Key Features
+
+- **Smart Alerts:** Set up stock alerts with custom keywords and criteria
+- **News Aggregation:** AI agent pulls news from multiple sources via RSS feeds
+- **Sentiment Analysis:** Analyze news sentiment based on configured keywords
+- **Stock Insights:** Comprehensive stock summaries including PE ratios and sentiment scores
+- **Notification System:** Multi-channel alerts (LINE Notify, Email - planned)
+- **Cloud Deployment:** Azure Cloud support for scalable infrastructure
+- **Real-time Monitoring:** Live stock data and news feed monitoring
+
+## 📁 Project Structure
+
+This is a monorepo containing multiple services and applications:
 
 ```
 stock-ai-agent-saas/
-├── frontend/           # Next.js React application
-├── backend/           # FastAPI Python services
-├── shared/            # Shared utilities and types
-├── docs/              # Documentation
-└── infra/             # Infrastructure as Code
+├── apps/
+│   ├── frontend/          # Next.js web application
+│   ├── api/              # FastAPI backend service
+│   └── ai-agent/         # AI processing service
+├── packages/
+│   ├── shared/           # Shared utilities and types
+│   ├── database/         # Database schemas and migrations
+│   └── config/           # Configuration management
+├── infrastructure/
+│   ├── docker/           # Docker configurations
+│   ├── kubernetes/       # K8s deployment manifests
+│   └── azure/            # Azure infrastructure as code
+├── docs/                 # Documentation
+├── scripts/              # Build and deployment scripts
+└── tests/                # End-to-end tests
 ```
 
-## 🛠️ Tech Stack
+*Note: Project structure will be implemented as development progresses.*
 
-### Frontend
-- **Framework**: Next.js (React)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS (planned)
-- **State Management**: Zustand/Redux (planned)
-
-### Backend
-- **Framework**: FastAPI (Python)
-- **Database**: PostgreSQL
-- **Cache**: Redis
-- **API Documentation**: OpenAPI/Swagger
-
-### Infrastructure
-- **Containerization**: Docker & Docker Compose
-- **Orchestration**: Kubernetes (planned)
-- **Cloud Platform**: Azure Cloud (planned)
-- **CI/CD**: GitHub Actions (planned)
-
-### AI & Data Processing
-- **News Processing**: RSS feed parsers
-- **Sentiment Analysis**: NLP models
-- **Market Data**: Stock APIs integration
-- **Notification**: LINE Notify, Email services
-
-## 🚦 Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- Python (v3.9 or higher)
 - Docker and Docker Compose
-- Node.js 18+ and npm/yarn
-- Python 3.9+ and pip
-- PostgreSQL (or use Docker)
-- Redis (or use Docker)
+- PostgreSQL (v13 or higher)
+- Redis (v6 or higher)
 
-### Quick Start
-
+### Installation
 1. **Clone the repository**
    ```bash
    git clone https://github.com/jin-tech/stock-ai-agent-saas.git
    cd stock-ai-agent-saas
    ```
-
-2. **Start all services with Docker Compose**
+2. **Set up environment variables**
    ```bash
-   docker compose up --build
+   cp .env.example .env
+   # Edit .env with your configuration
    ```
 
-3. **Access the application**
+3. **Install dependencies**
+   ```bash
+   # Install frontend dependencies
+   npm install
+
+   # Install backend dependencies
+   pip install -r requirements.txt
+   ```
+
+4. **Start services with Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+5. **Run database migrations**
+   ```bash
+   # This will be implemented with the backend service
+   python manage.py migrate
+   ```
+
+6. **Access the application**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000
    - API Documentation: http://localhost:8000/docs
 
-4. **Stop the services**
+## 💻 Development
+
+### Local Development Setup
+
+1. **Frontend Development**
    ```bash
-   docker compose down
+   cd apps/frontend
+   npm run dev
    ```
 
-## 📁 Project Structure
+2. **Backend Development**
+   ```bash
+   cd apps/api
+   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   ```
 
+3. **AI Agent Service**
+   ```bash
+   cd apps/ai-agent
+   python main.py
+   ```
+
+### Code Quality
+
+- **Linting:** ESLint for JavaScript/TypeScript, Black for Python
+- **Type Checking:** TypeScript for frontend, mypy for Python
+- **Testing:** Jest for frontend, pytest for backend
+- **Pre-commit Hooks:** Husky for automated code quality checks
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/stockai
+REDIS_URL=redis://localhost:6379
+
+# API Keys
+STOCK_API_KEY=your_stock_api_key
+NEWS_API_KEY=your_news_api_key
+
+# Authentication
+JWT_SECRET=your_jwt_secret
+JWT_ALGORITHM=HS256
+
+# External Services
+LINE_NOTIFY_TOKEN=your_line_notify_token
+SMTP_HOST=your_smtp_host
+SMTP_PORT=587
+SMTP_USER=your_email
+SMTP_PASSWORD=your_password
 ```
-stock-ai-agent-saas/
-├── README.md                 # This file
-├── LICENSE                   # Apache 2.0 License
-├── .gitignore               # Git ignore rules
-├── docker-compose.yml       # Docker services configuration
-├── .env.example             # Environment variables template
-│
-├── frontend/                # Next.js frontend application
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── README.md
-│
-├── backend/                 # FastAPI backend services
-│   ├── app/
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── README.md
-│
-├── shared/                  # Shared code and utilities
-│   ├── types/              # TypeScript type definitions
-│   ├── utils/              # Common utilities
-│   └── constants/          # Shared constants
-│
-├── docs/                   # Project documentation
-│   ├── api/               # API documentation
-│   ├── deployment/        # Deployment guides
-│   └── development/       # Development guides
-│
-├── infra/                  # Infrastructure as Code
-│   ├── docker/            # Docker configurations
-│   ├── kubernetes/        # K8s manifests
-│   └── azure/             # Azure ARM templates
-│
-└── scripts/               # Utility scripts
-    ├── setup.sh          # Development setup
-    ├── deploy.sh         # Deployment script
-    └── test.sh           # Testing script
-```
-
-## 🔧 Development
-
-### Setting Up Development Environment
-
-1. **Install dependencies**
-   ```bash
-   # Install backend dependencies
-   cd backend && pip install -r requirements.txt
-
-   # Install frontend dependencies
-   cd ../frontend && npm install
-   ```
-
-2. **Set up database**
-   ```bash
-   # Using Docker
-   docker run -d --name postgres -e POSTGRES_PASSWORD=password -p 5432:5432 postgres:13
-
-   # Or use docker-compose
-   docker-compose up -d postgres
-   ```
-
-3. **Run tests**
-   ```bash
-   # Backend tests
-   cd backend && python -m pytest
-
-   # Frontend tests
-   cd frontend && npm test
-   ```
-
-### Available Scripts
-
-- `npm run dev` - Start development servers
-- `npm run build` - Build for production
-- `npm run test` - Run all tests
-- `npm run lint` - Lint code
-- `docker-compose up` - Start all services
 
 ## 🚀 Deployment
 
-### Local Development
+### Azure Cloud Deployment
+
+The platform is designed to be deployed on Azure Cloud with the following services:
+
+- **Azure Container Instances** or **Azure Kubernetes Service** for application hosting
+- **Azure Database for PostgreSQL** for data storage
+- **Azure Cache for Redis** for caching and session management
+- **Azure Functions** for serverless AI processing tasks
+- **Azure Event Grid** for event-driven architecture
+
+### Docker Deployment
+
 ```bash
-docker-compose up -d
+# Build and run with Docker Compose
+docker-compose -f docker-compose.prod.yml up -d
+
+# Or build individual services
+docker build -t stock-ai-frontend ./apps/frontend
+docker build -t stock-ai-api ./apps/api
+docker build -t stock-ai-agent ./apps/ai-agent
 ```
 
-### Production (Azure Cloud)
+### Kubernetes Deployment
+
 ```bash
-# Coming soon - Kubernetes deployment scripts
-kubectl apply -f infra/kubernetes/
+# Apply Kubernetes manifests
+kubectl apply -f infrastructure/kubernetes/
 ```
 
 ## 🤝 Contributing
+We welcome contributions to the Stock AI Agent SaaS project! Please follow these guidelines:
 
-We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+### Development Process
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork the repository** and create a feature branch
+2. **Follow coding standards** and write tests for new features
+3. **Run tests** and ensure all checks pass
+4. **Submit a pull request** with a clear description of changes
+
+### Coding Standards
+
+- Follow conventional commit messages
+- Use TypeScript for frontend development
+- Follow PEP 8 for Python code
+- Write comprehensive tests for new features
+- Update documentation for API changes
+
+### Issue Reporting
+
+- Use GitHub Issues for bug reports and feature requests
+- Provide detailed reproduction steps for bugs
+- Include environment information and logs when relevant
+
+## 📋 Roadmap
+
+- [ ] **Phase 1:** Core infrastructure setup and basic UI
+- [ ] **Phase 2:** AI agent implementation and news processing
+- [ ] **Phase 3:** Trading integration and alert system
+- [ ] **Phase 4:** Advanced analytics and reporting
+- [ ] **Phase 5:** Mobile app development
+- [ ] **Phase 6:** Enterprise features and scaling
 
 ## 📄 License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🔮 Roadmap
+## 🔗 Links
 
-### Phase 1 - Core Platform (Current)
-- [x] Project setup and architecture
-- [ ] Basic frontend interface
-- [ ] FastAPI backend structure
-- [ ] Database schema design
-- [ ] Basic stock data integration
+- [Documentation](docs/)
+- [API Documentation](http://localhost:8000/docs) (when running locally)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
-### Phase 2 - AI Integration
-- [ ] News RSS feed processing
-- [ ] Sentiment analysis implementation
-- [ ] AI-powered stock recommendations
-- [ ] Alert system development
+## 📧 Support
 
-### Phase 3 - Advanced Features
-- [ ] Real-time notifications (LINE Notify, Email)
-- [ ] Advanced analytics dashboard
-- [ ] Portfolio management
-- [ ] Mobile app support
+For support and questions:
 
-### Phase 4 - Production Ready
-- [ ] Azure Cloud deployment
-- [ ] Kubernetes orchestration
-- [ ] Performance optimization
-- [ ] Security hardening
-- [ ] Monitoring and logging
-
-## 📞 Support
-
-- 📧 Email: [Your Email]
-- 🐛 Issues: [GitHub Issues](https://github.com/jin-tech/stock-ai-agent-saas/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/jin-tech/stock-ai-agent-saas/discussions)
-
-## 🙏 Acknowledgments
-
-- Thanks to all contributors who have helped shape this project
-- Inspired by modern SaaS architectures and AI-driven trading platforms
-- Built with love for the trading community
+- Create an issue on GitHub
+- Contact the development team
+- Check the documentation for common questions
 
 ---
-
-**Note**: This project is under active development. Features and documentation are being continuously updated.
